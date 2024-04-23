@@ -16,6 +16,7 @@ with tab1:
     st.number_input("Большая вентиляция", value=None, step=1)
     st.number_input("ХВС", value=None, step=1)
     st.number_input("Водоподготовка", value=None, step=1)
+    st.button("Сохранить")
 
 with tab2:
     st.date_input("Дата от", value=None)
