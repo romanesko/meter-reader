@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from typing import List
 
@@ -9,7 +8,10 @@ from config import set_config
 from models import Counter
 
 set_config()
+import auth
 import repo
+
+auth.check_login()
 
 st.header("Ввод показаний счетчиков")
 

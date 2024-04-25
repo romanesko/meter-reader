@@ -31,6 +31,15 @@ insert into meter.desc(key, title) values
     ('big_vent','Большая вентиляция'),  
     ('cold_water','ХВС'),  
     ('water_treatment','Водоподготовка');
+
+create table meter.users (
+    id bigserial primary key,
+    name text not null ,
+    login text not null,
+    password text not null,
+    token text not null);
+
+insert into meter.users(name, login, password, token) values('Admin','admin','--admin-pass--','--any-random-string--');
 ```
 
 ### Запуск через докер

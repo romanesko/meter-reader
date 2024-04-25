@@ -18,3 +18,9 @@ class Stat:
     min_val: int
     max_val: int
     median: int
+
+
+@dataclass
+class User:
+    id: int
+    name: str

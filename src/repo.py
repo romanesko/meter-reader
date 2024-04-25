@@ -1,11 +1,12 @@
 import datetime
+import random
+import string
 from typing import List
 
-import pandas as pd
 import streamlit as st
 from sqlalchemy import text
 
-from models import Counter, Stat
+from models import Counter, Stat, User
 
 conn = st.connection("env:PROFILE", type="sql")
 
@@ -60,3 +61,38 @@ def set_random(id: int, min_date: datetime.date, random_numbers):
             session.execute(text(query), {"date": min_date, "type_id": id, "val": i})
             min_date += datetime.timedelta(days=1)
         session.commit()
+
+
+def __generate_random_string(length):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+
+
+def auth(login, password):
+    res = conn.query("select * from meter.users where login = :login and password=:password",
+                     params={'login': login, 'password': password}, ttl=0).get('id')
+    if not res.empty:
+        id = int(res.iloc[0])
+        token = __generate_random_string(128)
+        with conn.session as session:
+            session.execute(text("update meter.users set token = :token where id = :id"), {'token': token, 'id': id})
+            session.commit()
+
+        return token
+    return None
+
+
+@st.cache_data(ttl=60)
+def get_user_by_token(token):
+    if token is None:
+        return None
+
+    res = conn.query("select id,name from meter.users where token = :token", params={'token': token}, ttl=0)
+
+    if not res.empty:
+        row = res.iloc[0]
+        user = User(row['id'], row['name'])
+        return user
+    else:
+        print('No user found for token', token)
+
+    return None
