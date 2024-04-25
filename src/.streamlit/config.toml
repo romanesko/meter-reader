@@ -1,0 +1,13 @@
+[ui]
+hideTopBar = true
+
+[client]
+showErrorDetails = false
+toolbarMode = "minimal"
+
+[server]
+headless = true
+runOnSave = true
+
+[runner]
+enforceSerializableSessionState = true
