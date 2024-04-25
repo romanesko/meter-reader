@@ -1,7 +1,7 @@
 # Сбор показаний счётчиков
+<img src="https://private-user-images.githubusercontent.com/1404610/325642641-5a44a0ca-1357-4d03-b0b2-1b7d5c85f4e5.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQwNTQxNzksIm5iZiI6MTcxNDA1Mzg3OSwicGF0aCI6Ii8xNDA0NjEwLzMyNTY0MjY0MS01YTQ0YTBjYS0xMzU3LTRkMDMtYjBiMi0xYjdkNWM4NWY0ZTUuanBnP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MDQyNSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDA0MjVUMTQwNDM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZjBmMWI3MDc3ZTRmYWY4ZmZhMWU4OTAzMWRhZTFhNjQzYjYyYTExYTQ2NTE3YjQ1NmY0MmQzYzZmNGNjODM4YSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmYWN0b3JfaWQ9MCZrZXlfaWQ9MCZyZXBvX2lkPTAifQ.8GoDQ5viAbuukZzhCT5pgbnDPXxjJKS_2MC_67zvbzU" width="500" /> <img src="https://private-user-images.githubusercontent.com/1404610/325642649-9efe7f83-0dd4-44fe-9189-feba397896a0.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQwNTQxNzksIm5iZiI6MTcxNDA1Mzg3OSwicGF0aCI6Ii8xNDA0NjEwLzMyNTY0MjY0OS05ZWZlN2Y4My0wZGQ0LTQ0ZmUtOTE4OS1mZWJhMzk3ODk2YTAuanBnP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MDQyNSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDA0MjVUMTQwNDM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9NjcwNWI1N2UwZWE5MGI0MDZmZTFhYmUzNThjZWMzMDhkYTcwNmZlMDE0YzlhY2ZlNjk0MDVlOWJmOWQ1OWVhNiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmYWN0b3JfaWQ9MCZrZXlfaWQ9MCZyZXBvX2lkPTAifQ.gGzcNZgtrTyagvdu--GO-uI9K5uGB16wb8_KEPCEo5E" width="500" />
 
-![](https://gist.github.com/assets/1404610/f62f6fb3-7b5a-4421-afed-0ab23732826d)
-![](https://gist.github.com/assets/1404610/051e5541-6692-4d4d-9c99-c76d6a655907)
+
 
 ## Подготовка к запуску
 
@@ -60,7 +60,7 @@ docker run -d -v $(PWD)/secrets.toml:/app/.streamlit/secrets.toml -p 8501:8501 s
 понадобится файл `secrets.toml` с содержимым:
 
 ```toml
-[connections.docker]
+[connections.local]
 dialect = "postgresql"
 host = "localhost"
 port = "5432"
