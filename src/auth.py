@@ -25,13 +25,12 @@ def check_login():
         st.text_input('Password', type='password', key='password')
         if st.button('Login', on_click=login):
             st.error('Invalid login or password')
-            st.stop()
-        # st.error('You need to login')
         st.stop()
     with st.sidebar:
         st.write(user.name)
         if st.button('Logout'):
             logout()
+    return user
 
 
 def logout():

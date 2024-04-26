@@ -1,10 +1,11 @@
 build:
 	@docker build -t meter-reader .
 
-run_debug:
+run-dev:
 	@docker run -it --rm -v $(PWD)/src:/app -p 8501:8501 meter-reader
 
-run:
+run-prod:
+	@docker build -t meter-reader .
 	@docker run -it --rm -v $(PWD)/src/.streamlit/secrets.toml:/app/.streamlit/secrets.toml -p 8501:8501 meter-reader
 
 push:

@@ -11,7 +11,7 @@ set_config()
 import auth
 import repo
 
-auth.check_login()
+user = auth.check_login()
 
 st.header("Ввод показаний счетчиков")
 
@@ -40,12 +40,12 @@ def validate_form(data: List[Counter]):
             raise ValueError(f"{item.title}: новые показания не могут быть меньше предыдущих")
 
 
-def save_values(data: List[Counter]):
+def save_values(data: List[Counter], user):
     for item in data:
         if item.max_val:
             item.value = item.value - item.max_val
     date = st.session_state.get("date")
-    repo.save_values(date, data)
+    repo.save_values(date=date, items=data, user=user)
 
 
 form_ready = True
@@ -64,7 +64,7 @@ def before_submit():
 
     try:
         validate_form(data)
-        save_values(data)
+        save_values(data,user)
 
         for item in st.session_state:
             if item.startswith('form.'):

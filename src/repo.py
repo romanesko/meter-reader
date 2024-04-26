@@ -20,16 +20,14 @@ def get_fields_description() -> List[Counter]:
     return out
 
 
-def save_values(date, items: List[Counter]):
-    ins_data = [{"date": date, "type_id": i.id, "val": i.value} for i in items]
+def save_values(*, date, items: List[Counter], user):
+    ins_data = [{"date": date, "type_id": i.id, "val": i.value, "created_by": user.id} for i in items]
 
     with conn.session as session:
         for d in ins_data:
-            query = f"""INSERT INTO meter.values ("date","type_id","val") VALUES (:date,:type_id,:val);"""
-            print(d)
+            query = f"""INSERT INTO meter.values ("date","type_id","val", "created_by") VALUES (:date,:type_id,:val, :created_by);"""
             session.execute(text(query), d)
         session.commit()
-    print('Values saved!', items)
 
 
 def check_date_exists(d) -> bool:
@@ -57,7 +55,7 @@ def get_graph(id: int, min_date, max_date):
 def set_random(id: int, min_date: datetime.date, random_numbers):
     with conn.session as session:
         for i in random_numbers:
-            query = f"""INSERT INTO meter.values ("date","type_id","val") VALUES (:date,:type_id,:val);"""
+            query = f"""INSERT INTO meter.values ("date","type_id","val","created_by") VALUES (:date,:type_id,:val, 1);"""
             session.execute(text(query), {"date": min_date, "type_id": id, "val": i})
             min_date += datetime.timedelta(days=1)
         session.commit()
@@ -90,7 +88,7 @@ def get_user_by_token(token):
 
     if not res.empty:
         row = res.iloc[0]
-        user = User(row['id'], row['name'])
+        user = User(int(row['id']), str(row['name']))
         return user
     else:
         print('No user found for token', token)
